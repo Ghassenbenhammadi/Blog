@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { map } from 'rxjs';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 
 class CustomValidators {
@@ -31,7 +31,7 @@ class CustomValidators {
         return { passwordsNotMatching: true };
       }
     } else {
-      return {}; // or return an appropriate error if controls are not found
+      return {};
     }
   }
 }
