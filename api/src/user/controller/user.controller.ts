@@ -11,6 +11,7 @@ import { diskStorage } from 'multer';
 import { v4 as uuidv4 } from 'uuid';
 import path = require('path');
 import { join } from 'path';
+import { UserIsUserGuard } from 'src/auth/guards/UserIsUser.guard';
 
 export const storage = {
     storage: diskStorage({
@@ -55,6 +56,9 @@ export class UserController {
     deleteOne(@Param('id') id:string){
         return from(this.userService.deleteOne(Number(id)));
     }
+
+
+    @UseGuards(JWTAuthGuard, UserIsUserGuard)
     @Put(':id')
     updateOne(@Param('id') id: string, @Body() user: User): Observable<any>{
         return from(this.userService.updateOne(Number(id),user));
@@ -67,8 +71,6 @@ export class UserController {
         @Query('username') username: string
     ): Observable<Pagination<User>> {
         limit = limit > 100 ? 100 : limit;
-    console.log(username);
-
         if (username === null || username === undefined) {
             return this.userService.paginate({ page: Number(page), limit: Number(limit), route: 'http://localhost:3000/api/users' });
         } else {
@@ -92,10 +94,6 @@ export class UserController {
     @UseInterceptors(FileInterceptor('file',storage))
     uploadFile(@UploadedFile() file, @Request() req) : Observable<Object> {
         const user: User = req.user.user;
-        console.log(user);
-        
-
-        // return of({ImagePath: file.filename});
         return this.userService.updateOne(user.id, {profileImage: file.filename}).pipe(
             tap((user: User) => console.log(user)),
             map((user: User) =>({profileImage: user.profileImage}))

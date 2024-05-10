@@ -26,7 +26,6 @@ export class AuthenticationService {
   login(loginForm: LoginForm) {
     return this.http.post<any>('/api/users/login', { email: loginForm.email, password: loginForm.password}).pipe(
       map((token)=> {
-        console.log('token');
         localStorage.setItem('blog-token', token.access_token);
         return token;
       })
