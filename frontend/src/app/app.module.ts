@@ -17,13 +17,16 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { UsersComponent } from './compoments/users/users.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { UserProfileComponent } from './compoments/user-profile/user-profile.component';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    UsersComponent
+    UsersComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -39,9 +42,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatButtonModule,
     MatSelectModule,
     MatTableModule,
-    MatPaginatorModule
-    
-    
+    MatPaginatorModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
