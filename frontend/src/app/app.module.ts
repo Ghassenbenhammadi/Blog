@@ -19,7 +19,13 @@ import { UsersComponent } from './compoments/users/users.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { UserProfileComponent } from './compoments/user-profile/user-profile.component';
 import {MatCardModule} from '@angular/material/card';
-import { JWT_OPTIONS, JwtHelperService, JwtInterceptor } from '@auth0/angular-jwt';
+import { JwtInterceptor, JwtModule } from '@auth0/angular-jwt';
+
+
+
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
 
 @NgModule({
   declarations: [
@@ -45,16 +51,24 @@ import { JWT_OPTIONS, JwtHelperService, JwtInterceptor } from '@auth0/angular-jw
     MatTableModule,
     MatPaginatorModule,
     MatCardModule,
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:3000'],
+        disallowedRoutes: [
+          'http://localhost:3000/api/users/login',
+          'http://localhost:3000/api/users/register'
+        ]
+      }
+    })
 
   ],
   providers: [
-    JwtHelperService,
-    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true
-
     }
   ],
   bootstrap: [AppComponent]
