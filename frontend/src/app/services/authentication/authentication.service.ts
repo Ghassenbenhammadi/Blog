@@ -30,11 +30,12 @@ export class AuthenticationService {
   login(loginForm: LoginForm) {
     return this.http.post<any>('/api/users/login', { email: loginForm.email, password: loginForm.password}).pipe(
       map((token)=> {
-        localStorage.setItem('JWT_NAME', token.access_token);
+        localStorage.setItem(JWT_NAME, token.access_token);
         return token;
       })
-    )
+    );
   }
+  
   register(user: User) {
     return this.http.post<any>('/api/users', user).pipe(
       map( user => user)
