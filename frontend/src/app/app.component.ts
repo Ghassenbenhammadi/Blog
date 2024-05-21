@@ -17,6 +17,10 @@ entires = [
  {
   name: 'Register',
   link: 'register'
+ },
+ {
+  name: 'Update profile',
+  link: 'update-profile'
  }
 ];
 

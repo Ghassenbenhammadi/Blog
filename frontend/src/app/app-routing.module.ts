@@ -4,6 +4,8 @@ import { LoginComponent } from './compoments/login/login.component';
 import { RegisterComponent } from './compoments/register/register.component';
 import { UsersComponent } from './compoments/users/users.component';
 import { UserProfileComponent } from './compoments/user-profile/user-profile.component';
+import { UpdateUserProfileComponent } from './compoments/update-user-profile/update-user-profile.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -14,6 +16,11 @@ const routes: Routes = [
   },
   {
     path:'register', component: RegisterComponent,
+  },
+  {
+    path: 'update-profile',
+    component: UpdateUserProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'users',
@@ -28,9 +35,7 @@ const routes: Routes = [
       }
     ]
   },
-  {
-    path: 'users/:id', component: UserProfileComponent,
-  }
+  
 ];
 
 @NgModule({
