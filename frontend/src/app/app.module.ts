@@ -20,6 +20,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { UserProfileComponent } from './compoments/user-profile/user-profile.component';
 import {MatCardModule} from '@angular/material/card';
 import { JwtInterceptor, JwtModule } from '@auth0/angular-jwt';
+import { UpdateUserProfileComponent } from './compoments/update-user-profile/update-user-profile.component';
 
 
 
@@ -33,7 +34,8 @@ export function tokenGetter() {
     LoginComponent,
     RegisterComponent,
     UsersComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    UpdateUserProfileComponent,
   ],
   imports: [
     BrowserModule,
