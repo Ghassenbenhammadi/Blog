@@ -1,5 +1,6 @@
-import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { UserRole } from "./user.interface";
+import { BlogEntryEntity } from "src/blog/model/blog-entry.entity";
 
 
 
@@ -28,6 +29,9 @@ export class UserEntity {
     @Column({nullable: true})
     profileImage: string;
 
+    @OneToMany(type => BlogEntryEntity, blogEntryEntity => blogEntryEntity.author)
+    blogEntries: BlogEntryEntity[];
+    
     @BeforeInsert()
     emailToLowerCase(){
         this.email = this.email.toLowerCase();
